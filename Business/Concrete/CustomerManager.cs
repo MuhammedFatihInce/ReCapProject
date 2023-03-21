@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -31,7 +32,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Customer>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.ProductsListed);
         }
 
         public IDataResult<Customer> GetById(int id)
