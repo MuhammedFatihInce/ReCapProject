@@ -13,13 +13,13 @@ namespace ConsoleUI
 
 		static void Main(string[] args)
 		{
-			IRentalService rentalService = new RentalManager(new EfRentalDal());
-			rentalService.Add(new Rental
-			{
-				CarId = 1,
-				CustomerId = 1,
-				RentDate = DateTime.Now
-			});
+			//IRentalService rentalService = new RentalManager(new EfRentalDal());
+			//rentalService.Add(new Rental
+			//{
+			//	CarId = 1,
+			//	CustomerId = 1,
+			//	RentDate = DateTime.Now
+			//});
 
 
 			//if (result.Success==true)
