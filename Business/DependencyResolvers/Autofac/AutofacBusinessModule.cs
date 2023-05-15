@@ -19,7 +19,7 @@ namespace Business.DependencyResolvers.Autofac
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<CarManager>().As<ICarDalService>().SingleInstance();
+			builder.RegisterType<CarManager>().As<ICarService>().SingleInstance();
 			builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
 			builder.RegisterType<CustomerManager>().As<ICustomerService>().SingleInstance();
 			builder.RegisterType<EfCustomerDal>().As<ICustomerDal>().SingleInstance();
@@ -36,7 +36,7 @@ namespace Business.DependencyResolvers.Autofac
 			builder.RegisterType<AuthManager>().As<IAuthService>();
 			builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
-			builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
+			
 
 
 

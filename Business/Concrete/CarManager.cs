@@ -2,6 +2,8 @@
 using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Cashing;
+using Core.Aspect.Autofac.Transaction;
 using Core.Aspect.Autofac.Validation;
 using Core.Utilities;
 using DataAccess.Abstract;
@@ -13,7 +15,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-	public class CarManager : ICarDalService
+	public class CarManager : ICarService
 	{
 		ICarDal _carDal;
 
@@ -24,6 +26,7 @@ namespace Business.Concrete
 
 		[SecuredOperation("product.add,admin")]
 		[ValidationAspect(typeof(CarValidator))]
+		[CacheRemoveAspect("IProductService.Get")]
 		public IResult Add(Car car)
 		{
 			
@@ -33,6 +36,7 @@ namespace Business.Concrete
 
 		}
 
+		[CacheRemoveAspect("IProductService.Get")]
 		public IResult Update(Car car)
 		{
 			_carDal.Update(car);
@@ -46,6 +50,7 @@ namespace Business.Concrete
 		}
 
 		[SecuredOperation("product.getall,admin")]
+		[CacheAspect]
 		public IDataResult<List<Car>> GetAll()
 		{
 			return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.ProductsListed);
@@ -69,6 +74,20 @@ namespace Business.Concrete
 		public IDataResult<List<CarDetailDto>> GetProductDetails()
 		{
 			return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetProductDetails());
+		}
+
+		[TransactionScopeAspect]
+		public IResult AddTransactionalTest(Car car)
+		{
+			Add(car);
+			if (car.DailyPrice < 10)
+			{
+				throw new Exception("");
+			}
+
+			Add(car);
+
+			return null;
 		}
 
 	}

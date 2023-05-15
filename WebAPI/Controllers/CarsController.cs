@@ -13,9 +13,9 @@ namespace WebAPI.Controllers
 	[ApiController]
 	public class CarsController : ControllerBase
 	{
-		ICarDalService _carDalService;
+		ICarService _carDalService;
 
-		public CarsController(ICarDalService carDalService)
+		public CarsController(ICarService carDalService)
 		{
 			_carDalService = carDalService;
 		}

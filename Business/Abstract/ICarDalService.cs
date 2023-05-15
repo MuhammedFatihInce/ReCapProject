@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Business.Abstract
 {
-	public interface ICarDalService
+	public interface ICarService
 	{
 		IResult Add(Car car);
 		IResult Update(Car car);
@@ -17,5 +17,6 @@ namespace Business.Abstract
 		IDataResult<List<Car>> GetCarsByColorId(int id);
 		IDataResult<List<Car>> GetByUnitPrice(decimal min, decimal max);
 		IDataResult<List<CarDetailDto>> GetProductDetails();
+		IResult AddTransactionalTest(Car car);
 	}
 }
